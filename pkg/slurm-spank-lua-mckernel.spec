@@ -1,15 +1,15 @@
 #!/usr/bin/rpm
 %define  release 1
 
-Summary: Lua plugin to use McKernel from Riken in slurm
+Summary: Lua plugin to use McKernel from Riken in Slurm
 Name: slurm-spank-lua-mckernel
 Version: 0.1
 Release: %{release}
 Group: System Environment/Kernel
 License: CeCill 2.0
-Source0: %{name}-%{version}.tar.gz
+Source0: https://github.com/cea-hpc/slurm-spank-lua-plugin-mckernel/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires: /bin/install, /bin/mkdir
-Requires: mckernel, slurm-spank-lua
+Requires: mckernel, slurm-spank-plugins-lua, clustershell, hwloc
 
 %description
 Lua plugin to use McKernel from Riken in Slurm. It provides all configuration

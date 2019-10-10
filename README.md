@@ -1,4 +1,4 @@
-What is slurm-spank-lua-plugin-mckernel
+What is slurm-spank-lua-mckernel
 ===============================
 
 McKernel is a light-weight multi-kernel operating system designed for high-end
@@ -17,7 +17,7 @@ Installation
 
 To use this plugin you have to install slurm and slurm-spank-lua plugin.
 
-on CenOS/RHEL systems:
+On CenOS/RHEL systems:
 
         yum install -y slurm slurm-spank-plugins-lua
 
@@ -26,6 +26,12 @@ Configure slurm to use spank lua plugin:
 
         cat /etc/slurm/plugstack.conf.d/lua-mixed.conf
             optional lua.so /etc/slurm/lua.d/*.lua
+
+
+The plugin also need some additional dependencies:
+
+        yum install -y hwloc clustershell
+
 
 Now to use mckernel plugin, copy src/mckernel.lua and src/config.lua in the correct place
 
@@ -45,7 +51,9 @@ Configuration
 ================
 
 You can configure the default resource alocated to the node by updating config.lua file.
-Exemple:
+
+Example:
+
         -- Use mckernel even if all cores are not allocated
         always_allow = true
 
