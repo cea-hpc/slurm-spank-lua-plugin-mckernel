@@ -1,5 +1,20 @@
+What is slurm-spank-lua-plugin-mckernel
+===============================
+
+McKernel is a light-weight multi-kernel operating system designed for high-end
+supercomputing.
+
+This plugin allow you to use Mckernel with Slurm resources manager.
+
+More information:
+* McKernel - https://www.sys.r-ccs.riken.jp/ResearchTopics/os/mckernel
+* Slurm - https://slurm.schedmd.com
+* Spank plugin - https://slurm.schedmd.com/spank.html
+* Stanford spank-lua plugin - https://github.com/stanford-rc/slurm-spank-lua
+
 Installation
 ===============
+
 To use this plugin you have to install slurm and slurm-spank-lua plugin.
 
 on CenOS/RHEL systems:
@@ -20,7 +35,9 @@ Now to use mckernel plugin, copy src/mckernel.lua and src/config.lua in the corr
 
 You need to install this plugin on submission nodes and on compute resources where you want to use McKernel.
 
-Install McKernel on the compute resources. Documenation available here: https://github.com/RIKEN-SysSoft/mckernel
+Install McKernel on the compute resources.
+
+Documentation available here: https://github.com/RIKEN-SysSoft/mckernel
 
 
 
