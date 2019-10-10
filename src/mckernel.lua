@@ -63,10 +63,11 @@ function do_and_return_output (cmd)
    return s
 end
 
+-- McKernel initialisation
 function init_mckernel (memory, cpus, irqs)
     local cmdline = mck_path.."/sbin/mcreboot.sh -m "..memory.." -c "..cpus.." -o "..mck_user
-    if irqs then
-        cmdline = cmdline .. " -r "..irqs
+    if irqs and irqs ~= "" then
+        cmdline = cmdline .. " -r ".. irqs
     end
     -- This setting is needed for McKernel to work
     do_and_log_output("sysctl -w vm.legacy_va_layout=0")
