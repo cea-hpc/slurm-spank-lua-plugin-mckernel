@@ -1,4 +1,4 @@
-always_allow = true
+always_allow = false
 
 default_settings = {
             ["path"] = "/bin:/usr/bin:/sbin:/usr/sbin",

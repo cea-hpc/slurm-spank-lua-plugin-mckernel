@@ -30,7 +30,7 @@ Configure slurm to use spank lua plugin:
 
 The plugin also need some additional dependencies:
 
-        yum install -y hwloc clustershell
+        yum install -y clustershell
 
 
 Now to use mckernel plugin, copy src/mckernel.lua and src/config.lua in the correct place
