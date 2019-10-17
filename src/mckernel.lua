@@ -182,13 +182,6 @@ function slurm_spank_init_post_opt (spank)
       end
     end
 
-    if (spank.context == "remote") then
-     verbose("lua/mckernel: prolog: setting default settings")
-        if init_mckernel(mck_memory, mck_cpus, mck_irqs) then
-            return SPANK.SUCCESS
-        end
-        return SPANK.ERROR
-    end
     return SPANK.SUCCESS
 end
 
