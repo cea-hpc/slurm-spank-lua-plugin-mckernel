@@ -1,5 +1,10 @@
 
 _posix = require "posix"
+
+-- Allocation threshold (number of allocated cores) needed to activate Mckernel
+-- plugin.
+alloc_threshold = 1
+
 dofile("/etc/slurm/lua.d/mckernel/config.lua")
 
 -- Set logging primitives
@@ -62,21 +67,12 @@ function do_and_return_output (cmd)
 
    return s
 end
-
 -- Find if a allocated node is fully allocated (exclusive mode)
 function is_exclusive(allocated_nodes)
-    local nodeinfo = do_and_return_output("scontrol show node $HOSTNAME")
-    local corespec = string.gsub(nodeinfo, ".*CoreSpecCount=([^ ]*) .*", "%1")
-    local cpus = string.gsub(nodeinfo, ".*CPUTot=([^ ]*) .*", "%1")
-    verbose("lua/mckernel exclusive: corespec: %s - cpus: %s", corespec, cpus)
-    if tonumber(corespec) + tonumber(allocated_nodes) >= tonumber(cpus) then
-        verbose("lua/mckernel exclusive: exclusive mode detected")
-        return true
-    end
-    verbose("lua/mckernel exclusive: exclusive mode NOT detected")
-    return false
+    return allocated_nodes >= alloc_threshold
 end
 
+--
 -- McKernel initialisation
 function init_mckernel (memory, cpus, irqs)
     local cmdline = mck_path.."/sbin/mcreboot.sh -m "..memory.." -c "..cpus.." -o "..mck_user
@@ -171,7 +167,7 @@ function slurm_spank_init_post_opt (spank)
       local job_num_cores=tonumber(do_and_return_output("/usr/bin/nodeset -R -c "..job_alloc_cores))
       verbose("lua/mckernel: job_num_cores: "..job_num_cores)
 
-      if job_num_cores and is_exclusive(job_num_cores) or always_allow then
+      if job_num_cores and is_exclusive(job_num_cores) then
          if init_mckernel(mck_memory, mck_cpus, mck_irqs) then
             return SPANK.SUCCESS
          end

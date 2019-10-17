@@ -54,8 +54,11 @@ You can configure the default resource alocated to the node by updating config.l
 
 Example:
 
-        -- Use mckernel even if all cores are not allocated
-        always_allow = true
+        -- Minimum number of allocated cores on a single node to activate
+        -- Mckernel. Since we consider Mckernel can not be run by multiple
+        -- users on a single node, this parameter define if the node is exclusively
+        -- allocated. (0 deactivate McKernel plugin)
+        alloc_threshold = 64
 
         -- Default configuration
         default_settings = {
