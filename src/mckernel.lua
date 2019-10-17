@@ -171,10 +171,10 @@ function slurm_spank_init_post_opt (spank)
          if init_mckernel(mck_memory, mck_cpus, mck_irqs) then
             return SPANK.SUCCESS
          end
-         return SPANK.ERROR
+         return -1
       else
          verbose("lua/mckernel: init_post_op: cannot set a privileged setting without owning all cores")
-         return SPANK.ERROR
+         return -1
       end
     end
 
